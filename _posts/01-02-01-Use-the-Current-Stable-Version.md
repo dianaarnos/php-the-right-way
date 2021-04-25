@@ -1,16 +1,22 @@
 ---
-title: Use a versão estável atual (7.2)
-isChild: true
-anchor: use_a_versao_estavel_atual
+title: Use a versão estável atual (8.0)
+isChild: true anchor: use_a_versao_estavel_atual
 ---
 
-## Use a versão estável atual (7.2) {#use_a_versao_estavel_atual_title}
+## Use a versão estável atual (8.0) {#use_a_versao_estavel_atual_title}
 
-Se você está começando com o PHP, certifique-se de começar com a versão estável mais recente [PHP 7.2][php-release]. O PHP 7.2 adiciona [novas_funcionalidades](#language_highlights) às antigas versões 5.x. O motor foi amplamente reescrito e o PHP é agora ainda mais rápido que as versões antigas.
+Se você está começando com PHP, comece com a versão estável atual do [PHP 8.0][php-release]. O PHP 8.x adiciona
+muitas [novas funcionalidades](#destaques_da_linguagem) às versões 7.x e 5.x mais antigas. O motor foi amplamente
+reescrito, e o PHP agora é ainda mais rápido do que as versões mais antigas. O PHP 8.0 é uma grande atualização da
+linguagem e contém muitas novas funcionalidades e otimizações.
 
-Você deveria tentar atualizar para a última versão estável rapidamente - PHP 5.6 [não receberá atualizações de segurança após 2018][php-supported-versions]. A atualização é simples e não existem muitas [quebras de compatibilidade com versões anteriores][php72-bc]. Se você não tem certeza em qual versão uma função ou determinado recurso se encontra, você pode verificar a documentação do PHP no site [php.net][php-docs].
+Você deve tentar atualizar rapidamente para a última versão estável - o PHP
+5.6 [já está em fim de vida](http://php.net/supported-versions.php). A atualização é fácil, pois não há
+muitas [quebras de compatibilidade][php-bc]. Se você não tiver certeza em qual versão uma função ou recurso está, você
+pode verificar a documentação do PHP no site php.net.
 
 [php-release]: http://php.net/downloads.php
+
 [php-docs]: http://php.net/manual/
-[php72-bc]: http://php.net/manual/migration72.incompatible.php
-[php-supported-versions]: http://php.net/supported-versions.php
+
+[php-bc]: http://php.net/manual/migration80.incompatible.php
