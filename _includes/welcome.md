@@ -1,54 +1,60 @@
 # Bem vindo
 
-Existe muita informação obsoleta na Web que desnorteia novos programadores PHP,
-espalhando más práticas e códigos inseguros. _PHP: Do Jeito Certo_ é uma referência
-rápida e fácil de ler, introduzindo desenvolvedores às melhores práticas, renomados
-padrões de código e links para tutoriais competentes pela Web.
+Há muitas informações desatualizadas na Web que levam os novos usuários de PHP a se desorientar, propagando más práticas
+e código inseguro. _PHP: Do Jeito Certo_ é uma referência rápida e fácil de ler para os padrões de código populares do
+PHP, links para tutoriais confiáveis ao redor da Web e o que os contribuidores consideram como melhores práticas no
+momento.
 
-É importante entender que _não existe uma maneira canônica de usar PHP_. Este site introduz novos desenvolvedores PHP 
-às melhores práticas, opções
-disponíveis e boas informações, que por muitas vezes, quando descobertas, já é tarde
-demais. Além disso leva o desenvolvedor a ter conceitos maduros sobre coisas que eram
-feitas durante anos e nunca foram reconsideradas. Esse site não é para dizer quais
-ferramentas você deve utilizar, mas ao invés disso, oferecer sugestões e múltiplas
-opções, e quando possível explicar as diferenças de acordo com casos de uso.
+_Não há uma maneira canônica de usar PHP_. Este site visa introduzir novos desenvolvedores PHP a alguns tópicos que eles
+podem não descobrir até que seja tarde demais, e pretende oferecer aos profissionais experientes algumas idéias frescas
+sobre esses tópicos que eles vêm utilizando há anos sem nunca repensar. Este website também não lhe dirá quais
+ferramentas usar, mas oferecerá sugestões de múltiplas opções, quando possível explicando as diferenças de abordagem e
+caso de uso.
 
-Este é um documento "vivo", que continuará sendo atualizado com mais informações úteis
-e exemplos, assim que eles estiverem disponíveis.
+Este é um documento vivo e continuará a ser atualizado com mais informações e exemplos úteis à medida que estiverem
+disponíveis.
 
 ## Traduções
 
-_PHP: Do Jeito Certo_ está (ou em breve estará) sendo traduzido em várias linguagens:
+_PHP: Do Jeito Certo_ está traduzido em várias linguagens:
 
-* [Inglês](http://www.phptherightway.com)
-* [Búlgaro](http://bg.phptherightway.com/)
-* [Chinês (Simplificado)](http://wulijun.github.com/php-the-right-way)
-* [Francês](http://eilgin.github.io/php-the-right-way/)
-* [Alemão](http://rwetzlmayr.github.io/php-the-right-way/)
-* [Língua indonésia](http://id.phptherightway.com/)
-* [Italiano](http://it.phptherightway.com/)
-* [Japonês](http://ja.phptherightway.com)
-* [Coreano](http://wafe.github.io/php-the-right-way/)
-* [Polonês](http://pl.phptherightway.com/)
-* [Português do Brasil](http://br.phptherightway.com/)
-* [Romeno](https://bgui.github.io/php-the-right-way/)
-* [Russo](http://getjump.github.io/ru-php-the-right-way)
-* [Esloveno](http://sl.phptherightway.com)
-* [Espanhol](http://phpdevenezuela.github.io/php-the-right-way/)
-* [Tailandês](https://apzentral.github.io/php-the-right-way/)
-* [Turco](http://hkulekci.github.io/php-the-right-way/)
-* [Ucraniano](http://iflista.github.com/php-the-right-way/)
+* [English](http://www.phptherightway.com)
+* [Español](http://phpdevenezuela.github.io/php-the-right-way)
+* [Français](http://eilgin.github.io/php-the-right-way/)
+* [Indonesia](http://id.phptherightway.com)
+* [Italiano](http://it.phptherightway.com)
+* [Polski](http://pl.phptherightway.com)
+* [Português do Brasil](http://br.phptherightway.com)
+* [Română](https://bgui.github.io/php-the-right-way/)
+* [Slovenščina](http://sl.phptherightway.com)
+* [Srpski](http://phpsrbija.github.io/php-the-right-way/)
+* [Türkçe](http://hkulekci.github.io/php-the-right-way/)
+* [български](http://bg.phptherightway.com)
+* [Русский язык](http://getjump.github.io/ru-php-the-right-way)
+* [Українська](http://iflista.github.com/php-the-right-way)
+* [العربية](https://adaroobi.github.io/php-the-right-way/)
+* [فارسى](http://novid.github.io/php-the-right-way/)
+* [ภาษาไทย](https://apzentral.github.io/php-the-right-way/)
+* [한국어판](http://modernpug.github.io/php-the-right-way)
+* [日本語](http://ja.phptherightway.com)
+* [简体中文](https://laravel-china.github.io/php-the-right-way/)
+* [繁體中文](https://laravel-taiwan.github.io/php-the-right-way)
+
+## Livro (em inglês)
+
+A versão mais recente de _PHP: The Right Way_ também está disponível nos formatos PDF, EPUB e MOBI. [Vá para o Leanpub][1]
 
 ## Como contribuir
 
-Ajude a tornar este site o melhor recurso para novos programadores PHP! [Contribua no GitHub][1]
+Ajude a tornar este site o melhor recurso para novos programadores PHP! [Contribua no GitHub][2]
 
 ## Espalhe a palavra!
 
-_PHP: Do Jeito Certo_ possui banners que você pode usar em seu site. Mostre seu apoio e deixe que novos desenvolvedores 
+_PHP: Do Jeito Certo_ possui banners que você pode usar em seu site. Mostre seu apoio e deixe que novos desenvolvedores
 PHP saibam onde encontrar boas informações!
 
-[Banners para divulgação][2]
+[Banners para divulgação][3]
 
-[1]: https://github.com/PHPSP/php-the-right-way/tree/gh-pages
-[2]: /banners.html
+[1]: https://leanpub.com/phptherightway
+[2]: https://github.com/PHPSP/php-the-right-way/tree/gh-pages
+[3]: /banners.html
