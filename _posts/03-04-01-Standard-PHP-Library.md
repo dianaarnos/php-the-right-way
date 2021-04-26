@@ -12,5 +12,7 @@ e outras) e iteradores que podem percorrer por essas estruturas de dados ou por 
 interfaces SPL.
 
 * [Leia sobre a SPL][spl]
+* [Curso em vídeo sobre SPL no Lynda.com(pago)][spllynda]
 
 [spl]: http://php.net/book.spl
+[spllynda]: https://www.lynda.com/PHP-tutorials/Up-Running-Standard-PHP-Library/175038-2.html
