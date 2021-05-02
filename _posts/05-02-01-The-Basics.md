@@ -6,9 +6,10 @@ anchor: o_basico
 
 ## O Básico {#o_basico_title}
 
-PHP é uma grande linguagem que permite a programadores de todos os níveis produzirem código, não apenas rapidamente,
-mas eficientemente. Entretando enquanto se avança na linguagem, nós frequentemente esquecemos do básico que tinhamos
-aprendido no começo (ou passado o olho) em prol de atalhos e/ou maus hábitos. Para ajudar a combater esse problema
-comum, esse seção é focada em lembrar aos programadores das práticas básicas de codificação no PHP.
+PHP é uma vasta linguagem que permite que programadores de todos os níveis tenham a capacidade de produzir código não só
+rapidamente, mas também de forma eficiente.
+Entretanto, enquanto avançamos através da linguagem, muitas vezes esquecemos o básico que aprendemos (ou negligenciamos)
+em favor de atalhos e/ou maus hábitos. Para ajudar a combater esta questão comum, esta seção tem como objetivo lembrar
+os programadores das práticas básicas de codificação em PHP.
 
 * Continue lendo [O Básico]({{ site.baseurl }}pages/The-Basics.html)

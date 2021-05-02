@@ -39,18 +39,16 @@ global que seja incluído), e a função `mb_http_output()` logo após ele se se
 navegador. Definir explicitamente a codificação de suas strings em cada script vai lhe poupar muita dor de cabeça 
 futuramente.
 
-Além disso, muitas funções PHP que operam em cadeias de caracteres têm um parâmetro opcional que lhe permite especificar 
-o caractere
-codificação. Você deve sempre indicar explicitamente UTF-8 quando for dada a opção. Por exemplo, `htmlentities()` tem 
-uma
-opção para codificação de caracteres, e você deve sempre especificar UTF-8 se lidar com tais cordas. Note-se que a 
+Além disso, muitas funções PHP que operam com strings têm um parâmetro opcional que lhe permite especificar 
+a codificação. Você deve sempre indicar explicitamente UTF-8 quando for dada a opção. Por exemplo, `htmlentities()` tem 
+uma opção para codificação de caracteres, e você deve sempre especificar UTF-8 se lidar com tais strings. Note-se que a 
 partir do PHP 5.4.0, UTF-8 é a codificação padrão para `htmlentities()` e `htmlspecialchars()`.
 
 Finalmente, se você estiver criando um aplicativo distribuído e não tiver certeza de que a extensão `mbstring` será 
 ativada, então considere o uso do pacote Composer [patchwork/utf8]. Isto irá usar a `mbstring` se estiver disponível, e 
 criar fall back para funções UTF-8 que não estiverem.
 
-[Multibyte Extensão String]: http://php.net/book.mbstring
+[Multibyte Extensão String]: https://secure.php.net/book.mbstring
 [patchwork/utf8]: https://packagist.org/packages/patchwork/utf8
 
 ### UTF-8 no nível de banco de dados
@@ -63,21 +61,31 @@ estão todos setados com o character set e o collation como `utf8mb4` e que voc�
 de conexão PDO. Veja o exemplo de código abaixo. Isto é _criticamente importante_.
 
 Observe que você deve usar o character set `utf8mb4` para ter suporte completo de UTF-8 e não o character set `utf8`! 
-Continue lendo para o porquê.
+Veja "Leitura adicional" para o porquê.
 
 ### UTF-8 no nível do navegador
 
 Use a função `mb_http_output()` para garantir que o seu script PHP gere strings UTF-8 para o seu browser.
 
-O navegador então será avisado pela resposta HTTP que esta página deve ser considerada como UTF-8. A abordagem 
-histórica para fazer isso foi a inclusão da [tag `<meta>` charset](http://htmlpurifier.org/docs/enduser-utf8.html) na 
-tag `<head>` da sua página. Esta abordagem é perfeitamente válida, mas definir o charset no cabeçalho `Content-type` é 
-realmente [muito mais rápido](https://developers.google.com/speed/docs/best-practices/rendering#SpecifyCharsetEarly).
+O navegador precisará então ser informado pela resposta HTTP que esta página deve ser considerada como UTF-8. Hoje, é 
+comum definir o conjunto de caracteres no cabeçalho de resposta HTTP da seguinte maneira:
 
-{% highlight php%}
+{% highlight php %}
+<?php
+header('Content-Type: text/html; charset=UTF-8')
+{% endhighlight %}
+
+A abordagem histórica para fazer isso era incluir a [tag de charset `<meta>`](http://htmlpurifier.org/docs/enduser-utf8.html) 
+na tag `<head>` da sua página.
+
+{% highlight php %}
 <?php
 // Diz para o PHP que estamos usando strings UTF-8 até o final do script
 mb_internal_encoding('UTF-8');
+$utf_set = ini_set('default_charset', 'utf-8');
+if (!$utf_set) {
+    throw new Exception('could not set default_charset to utf-8, please ensure it\'s set on your system!');
+}
 
 // Diz para o PHP que nós vamos enviar uma saída UTF-8 para o navegador
 mb_http_output('UTF-8');
@@ -85,13 +93,13 @@ mb_http_output('UTF-8');
 // A nossa string UTF-8 de teste
 $string = 'Êl síla erin lû e-govaned vîn.';
 
-// Transformar a seqüência de alguma forma com uma função multibyte
+// Transformar a string de alguma forma com uma função multibyte
 // Observe como cortamos a string em um caractere não-ASCII para fins de demonstração
 $string = mb_substr($string, 0, 15);
 
 // Conectar a um banco de dados para armazenar a string transformada
 // Veja o exemplo PDO neste documento para obter mais informações
-// Observe os comandos `set names utf8mb4`!
+// Observe o `charset=utf8mb4` no Data Source Name (DSN)
 $link = new PDO(
     'mysql:host=your-hostname;dbname=your-db;charset=utf8mb4',
     'your-username',
@@ -104,31 +112,39 @@ $link = new PDO(
 
 // Armazena a nossa string transformada como UTF-8 em nosso banco de dados
 // Seu DB e tabelas estão com character set e collation utf8mb4, certo?
-$handle = $link->prepare('insert into ElvishSentences (Id, Body) values (?, ?)');
-$handle->bindValue(1, 1, PDO::PARAM_INT);
-$handle->bindValue(2, $string);
+$handle = $link->prepare('insert into ElvishSentences (Id, Body, Priority) values (default, :body, :priority)');
+$handle->bindParam(':body', $string, PDO::PARAM_STR);
+$priority = 45;
+$handle->bindParam(':priority', $priority, PDO::PARAM_INT); // dizer explicitamente para o PDO esperar um int
 $handle->execute();
 
-// Recuperar a string que armazenamos apenas para provar se foi armazenada corretamente
-$handle = $link->prepare('select * from ElvishSentences where Id = ?');
-$handle->bindValue(1, 1, PDO::PARAM_INT);
+// Recuperar a string que acabamos de armazenar para provar se foi armazenada corretamente
+$handle = $link->prepare('select * from ElvishSentences where Id = :id');
+$id = 7;
+$handle->bindParam(':id', $id, PDO::PARAM_INT);
 $handle->execute();
 
-// Armazena o resultado em um objeto que vamos saída mais tarde em nossa HTML
-$result = $handle->fetchAll(PDO::FETCH_OBJ);
+// Armazenar o resultado em um objeto que emitiremos mais tarde em nossa HTML
+// Este objeto não vai matar sua memória porque vai buscar os dados Just-In-Time para
+$result = $handle->fetchAll(\PDO::FETCH_OBJ);
 
-header('Content-Type: text/html; charset=UTF-8');
+// Um wrapper de exemplo para permitir que você escape de dados para html
+function escape_to_html($dirty){
+    echo htmlspecialchars($dirty, ENT_QUOTES, 'UTF-8');
+}
+
+header('Content-Type: text/html; charset=UTF-8'); // Desnecessário se default_charset já estiver configurado para utf-8
 ?><!doctype html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>UTF-8 test page</title>
+        <title>Página de teste UTF-8</title>
     </head>
     <body>
         <?php
         foreach($result as $row){
-            print($row->Body);  // Isto deve emitir corretamente nossa string transformada como UTF-8 para o navegador
-         }
+            escape_to_html($row->Body);  // Isso deve gerar a saída correta para o navegador da nossa string UTF-8 transformada
+        }
         ?>
     </body>
 </html>
@@ -149,9 +165,8 @@ header('Content-Type: text/html; charset=UTF-8');
   * [`mb_http_output()`](http://php.net/function.mb-http-output)
   * [`htmlentities()`](http://php.net/function.htmlentities)
   * [`htmlspecialchars()`](http://php.net/function.htmlspecialchars)
-* [Dicas PHP e UTF-8](http://blog.loftdigital.com/blog/php-utf-8-cheatsheet)
-* [Manuseando UTF-8 com o PHP](http://www.phpwact.org/php/i18n/utf-8)
 * [Stack Overflow: Quais os fatores que fazem o PHP incompatível com Unicode?](http://stackoverflow.com/questions/571694/what-factors-make-php-unicode-incompatible)
 * [Stack Overflow: Melhores práticas em PHP e MySQL com strings internacionais](http://stackoverflow.com/questions/140728/best-practices-in-php-and-mysql-with-international-strings)
 * [Como ter suporte total a Unicode em bases de dados MySQL](http://mathiasbynens.be/notes/mysql-utf8mb4)
 * [Trazendo Unicode para o PHP com `Portable UTF-8`](http://www.sitepoint.com/bringing-unicode-to-php-with-portable-utf8/)
+* [Stack Overflow: DOMDocument loadHTML não encoda UTF-8 corretamente](https://stackoverflow.com/questions/8218230/php-domdocument-loadhtml-not-encoding-utf-8-correctly)
